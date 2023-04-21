@@ -94,7 +94,7 @@ function popularReducer(state, action) {
   } else if (action.type === "error") {
     return {
       ...state,
-      error: action.error.message,
+      error: action.message,
     };
   } else {
     throw new Error("That action type isn't supported");
@@ -112,7 +112,7 @@ export default function Popular() {
 
       fetchPopularRepos(selectedLanguage)
         .then((repos) => dispatch({ type: "success", selectedLanguage, repos }))
-        .catch((error) => dispatch({ type: "error", error }));
+        .catch((error) => dispatch({ type: "error", message: error.message }));
     }
   }, [fetchedLanguages, selectedLanguage]);
 
